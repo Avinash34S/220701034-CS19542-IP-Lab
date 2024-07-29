@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        img {
+            border-radius: 10%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+    <title>Black Hole</title>
+</head>
+<body>
+    <h1>B L A C K H O L E</h1>
+    <p>A cosmic abyss where the fabric of spacetime is distorted beyond recognition, merging Einstein's theory of General Relativity with the quantum uncertainty of matter's ultimate fate.</p>
+    <map name="image">
+        <area shape="rect" coords="761,273,1008,332" href="./accretiondisk.html" alt="asscdisc" />
+        <area shape="rect" coords="1149,277,1328,379" href="./eventhorizon.html" alt="event_horizon" />
+        <area shape="rect" coords="1516,367,1781,473" href="./jetrad.html" alt="jetrad" />
+        <area shape="rect" coords="980,1127,1206,1223" href="./singularity.html" alt="singularity" />
+    </map>
+    <img usemap="#image" src="./asserts/blackhole.jpg" alt="black_hole" id="blackhole-image" />
+
+    <script>
+        function resizeImageMap() {
+            const image = document.getElementById('blackhole-image');
+            const width = image.naturalWidth;
+            const height = image.naturalHeight;
+            const areas = document.querySelectorAll('map[name="image"] area');
+
+            areas.forEach(area => {
+                const originalCoords = area.getAttribute('coords').split(',').map(Number);
+                const scaledCoords = originalCoords.map((coord, index) => {
+                    if (index % 2 === 0) {
+                        return (coord / width) * image.width;
+                    } else {
+                        return (coord / height) * image.height;
+                    }
+                });
+                area.setAttribute('coords', scaledCoords.join(','));
+            });
+        }
+
+        window.addEventListener('load', resizeImageMap);
+        window.addEventListener('resize', resizeImageMap);
+    </script>
+</body>
+</html>
